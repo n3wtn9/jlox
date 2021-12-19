@@ -3,9 +3,9 @@
  */
 package jlox;
 
-import java.io.BufferReader;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamREader;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,9 +25,9 @@ public class Lox {
     }
   }
 
-  private static void runFile(String path) throw IOException {
+  private static void runFile(String path) throws IOException {
     byte[] bytes = Files.readAllBytes(Paths.get(path));
-    run(new String(bytes, Carset.defaultCarset()));
+    run(new String(bytes, Charset.defaultCharset()));
 
     // Indicate an error in the exit code;
     if (hadError) System.exit(65);
@@ -35,11 +35,12 @@ public class Lox {
 
   private static void runPrompt() throws IOException {
     InputStreamReader input = new InputStreamReader(System.in);
-    BufferReader reader = new BufferedReader(input);
+    BufferedReader reader = new BufferedReader(input);
 
     for (;;) {
-      System.out.print(" > ");
+      System.out.print("> ");
       String line = reader.readLine();
+      System.out.println(line);
       if (line == null) break;
       run(line);
       hadError = false;
@@ -56,11 +57,12 @@ public class Lox {
   }
 
   static void error(int line, String message) {
-    report(line "", message);
+    report(line, "", message);
   }
 
-  private static void report(int line, Stirng where, String message) {
+  private static void report(int line, String where, String message) {
     System.err.println(
                        "[line " + line + "] Error" + where + ": " + message);
     hadError = true;
+  }
 }
