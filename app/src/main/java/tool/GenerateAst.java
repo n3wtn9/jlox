@@ -28,9 +28,9 @@ public class GenerateAst {
 
     writer.println("package jlox;");
     writer.println();
-    writer.println("import java.util.list;");
+    writer.println("import java.util.List;");
     writer.println();
-    writer.println("absract class " + baseName + " {");
+    writer.println("abstract class " + baseName + " {");
 
     defineVisitor(writer, baseName, types);
 
@@ -82,7 +82,7 @@ public class GenerateAst {
     // Visitor pattern
     writer.println();
     writer.println("    @Override");
-    writer.println("    <R> R accept(Visitor<R> visitor);");
+    writer.println("    <R> R accept(Visitor<R> visitor) {");
     writer.println("      return visitor.visit" +
                    className + baseName + "(this);");
     writer.println("    }");

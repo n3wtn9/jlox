@@ -30,7 +30,8 @@ run {
 
 application {
     // Define the main class for the application.
-    mainClass = 'jlox.Lox'
+    // mainClass = 'jlox.Lox'
+    mainClass = 'jlox.AstPrinter'
 }
 
 tasks.named('test') {
