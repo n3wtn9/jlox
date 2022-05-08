@@ -3,7 +3,7 @@ package jlox;
 import java.util.HashMap;
 import java.util.Map;
 
-public LoxInstance {
+public class LoxInstance {
   private LoxClass klass;
   private final Map<String, Object> fields = new HashMap<>();
 
@@ -17,7 +17,7 @@ public LoxInstance {
     }
 
     LoxFunction method = klass.findMethod(name.lexeme);
-    if (method != null) return method;
+    if (method != null) return method.bind(this);;
 
     throw new RuntimeError(name,
                            "Undefined property '" + name.lexeme + "'.");

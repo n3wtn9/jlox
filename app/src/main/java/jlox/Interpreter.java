@@ -56,6 +56,25 @@ class Interpreter implements Expr.Visitor<Object>,
   }
 
   @Override
+  public Object visitSetExpr(Expr.Set expr) {
+    Object object = evalute(expr.object);
+
+    if (!(object instanceof LoxInstance)) {
+      throw new RuntimeError(expr.name,
+                             "Only instances have fields.");
+    }
+
+    Object value = evalute(expr.value);
+    ((LoxInstance)object).set(expr.name, value);
+    return value;
+  }
+
+  @Override
+  public Object visitThisExpr(Expr.This expr) {
+    return lookUpVariable(expr.keyword, expr);
+  }
+
+  @Override
   public Object visitGroupingExpr(Expr.Grouping expr) {
     return evaluate(expr.expression);
   }
