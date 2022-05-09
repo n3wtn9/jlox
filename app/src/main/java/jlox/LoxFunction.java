@@ -11,8 +11,8 @@ class LoxFunction implements LoxCallable {
     this.declaration = declaration;
   }
 
-  LoxFunction bind(LoxInstnace instance) {
-    Environment environment = new Environmnet(closure);
+  LoxFunction bind(LoxInstance instance) {
+    Environment environment = new Environment(closure);
     environment.define("this", instance);
     return new LoxFunction(declaration, environment);
   }
